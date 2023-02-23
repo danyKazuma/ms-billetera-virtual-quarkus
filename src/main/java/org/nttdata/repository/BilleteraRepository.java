@@ -1,17 +1,22 @@
 package org.nttdata.repository;
 
 
-import io.quarkus.mongodb.panache.PanacheMongoRepository;
+
+import io.quarkus.mongodb.panache.reactive.ReactivePanacheMongoRepository;
+import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.NotFoundException;
+
 import org.nttdata.model.Billetera;
 
 import java.util.List;
 
+
 @ApplicationScoped
-public class BilleteraRepository implements PanacheMongoRepository<Billetera> {
-    public Billetera findBilleteraByNumeroCelular(String numeroCelular){
-        return find("numeroCelular",numeroCelular).firstResultOptional().orElseThrow(NotFoundException::new);
+public class BilleteraRepository implements ReactivePanacheMongoRepository<Billetera> {
+    public Uni<List<Billetera>> findBilleteraByNumeroCelular(String numeroCelular){
+        return listAll();
     }
+
+
 
 }

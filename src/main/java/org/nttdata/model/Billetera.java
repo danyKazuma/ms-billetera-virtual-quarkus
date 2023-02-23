@@ -1,30 +1,73 @@
 package org.nttdata.model;
 
 
-import jakarta.persistence.*;
+import io.quarkus.mongodb.panache.common.MongoEntity;
+import org.bson.types.ObjectId;
 
-@Entity
-@Table(name = "billetera")
+@MongoEntity(collection  = "billetera")
 public class Billetera {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private String id;
 
-    @Column(name = "nombre")
+    private ObjectId id;
+
     public String nombre;
-    @Column(name = "apellidos")
+
     public String apellidos;
-    @Column(name = "numeroTarjeta")
-    public String numeroTarjeta;
-    @Column(name = "numeroCelular")
+
+//    public String numeroTarjeta;
+
     public String numeroCelular;
-    @Column(name = "clave")
+
     public String clave;
-    @Column(name="fecha")
-    public String fecha;
-    @Column(name="estado")
+
+//    public String fecha;
+
     public String estado;
 
+    public ObjectId getId() {
+        return id;
+    }
 
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getNumeroCelular() {
+        return numeroCelular;
+    }
+
+    public void setNumeroCelular(String numeroCelular) {
+        this.numeroCelular = numeroCelular;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

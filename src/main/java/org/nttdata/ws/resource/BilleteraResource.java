@@ -1,15 +1,17 @@
 package org.nttdata.ws.resource;
 
+import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import org.nttdata.service.BilleteraService;
-import org.nttdata.ws.vo.BilleteraVO;
 
+import jakarta.ws.rs.core.Response;
+import org.nttdata.model.Billetera;
+import org.nttdata.repository.BilleteraRepository;
+
+
+
+import java.util.List;
 import java.util.Map;
 
 @Path("ms-billetera-virtual/target")
@@ -18,7 +20,12 @@ import java.util.Map;
 public class BilleteraResource {
 
     @Inject
-    BilleteraService billeteraService;
+    BilleteraRepository billeteraRepository;
 
-
+    @GET
+    @Path("/buscar/{numeroCelular}")
+    public Response buscarClientePorCelular(@PathParam("numeroCelular")String numeroCelular) {
+        Uni<List<Billetera>> response=billeteraRepository.findBilleteraByNumeroCelular(numeroCelular);
+        return Response.ok(response).build();
+    }
 }
